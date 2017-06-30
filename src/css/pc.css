@@ -1,0 +1,10 @@
+.page-footer {
+  margin: 10px;
+  text-align: center;
+}
+
+.menu h1,
+.menu ul,
+.menu li {
+  display: inline-block;
+}
