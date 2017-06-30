@@ -47,7 +47,9 @@ gulp.task('inline', function() {
   gulp.src('public/**.html')
     .pipe(inline({
       base: 'public',
-      js: [babel, uglify],
+      js: [babel({
+        presets: ['es2015']
+      })],
       css: [minifyCss, autoprefixer]
     }))
     .pipe(gulp.dest('public'))
