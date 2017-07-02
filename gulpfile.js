@@ -34,13 +34,19 @@ gulp.task('js', function() {
 })
 
 gulp.task('css', function() {
-  gulp.src(['src/css/base.css', 'src/css/pc.css'])
-    .pipe(concat('pc.css'))
+  gulp.src('src/css/base.css')
     .pipe(gulp.dest('public'))
 
-  gulp.src(['src/css/base.css', 'src/css/mob.css'])
-    .pipe(concat('mob.css'))
+  gulp.src(['src/css/pc.css'])
     .pipe(gulp.dest('public'))
+
+  gulp.src(['src/css/mob.css'])
+    .pipe(gulp.dest('public'))
+})
+
+gulp.task('img', function() {
+  gulp.src('src/assets/*')
+    .pipe(gulp.dest('public/assets'))
 })
 
 gulp.task('inline', function() {
@@ -63,7 +69,7 @@ gulp.task('clean', function() {
 gulp.task('build', function() {
   gulp.start('clean')
   setTimeout(() => {
-    gulp.start(['css', 'js', 'html'])
+    gulp.start(['css', 'js', 'html', 'img'])
   }, 100)
   setTimeout(() => {
     gulp.start('inline')

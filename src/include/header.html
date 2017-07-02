@@ -1,9 +1,16 @@
 <nav class="menu">
-  <h1>这是 headder 的内容</h1>
+  <h1>FLOAT</h1>
   <ul>
-    <li>11111111111</li>
-    <li>2222222222</li>
-    <li>3333333333</li>
-    <li>444444444</li>
+    <li><a href="work.html">WORK</a></li>
+    <li><a href="service.html">SERVICE</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+    <li><a href="contact.html">CONTACT</a></li>
   </ul>
 </nav>
+<script>
+var currentHref = window.location.href.split('/').pop()
+var activeTab = document.querySelector(`a[href='${currentHref}']`)
+
+activeTab = activeTab || document.querySelector(`a[href='work.html']`)
+activeTab.className = 'active'
+</script>

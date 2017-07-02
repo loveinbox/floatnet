@@ -1,7 +1,31 @@
 const data = {
   index: [
-    [1, 2, 3],
-    [4, 5, 6]
+    [{
+      src: 'assets/test1.jpg',
+      text: 'image1'
+    }, {
+      src: 'assets/test2.png',
+      text: 'image2'
+    }, {
+      src: 'assets/test1.jpg',
+      text: 'image3'
+    }, {
+      src: 'assets/test2.png',
+      text: 'image4'
+    }],
+    [{
+      src: 'assets/test1.jpg',
+      text: 'image5'
+    }, {
+      src: 'assets/test2.png',
+      text: 'image6'
+    }, {
+      src: 'assets/test1.jpg',
+      text: 'image7'
+    }, {
+      src: 'assets/test2.png',
+      text: 'image'
+    }]
   ]
 }
 
@@ -28,8 +52,17 @@ class PageRender {
       }
       this.createListItem = data => {
         let item = document.createElement('td')
-        item.innerText = data
-        item.setAttribute('data-123', data)
+        let itemDiv = document.createElement('div')
+        let itemImg = document.createElement('img')
+        let itemP = document.createElement('p')
+
+        itemImg.src = data.src
+        itemP.innerText = data.text
+
+        itemDiv.appendChild(itemImg)
+        itemDiv.appendChild(itemP)
+        item.appendChild(itemDiv)
+
         return item
       }
     }
