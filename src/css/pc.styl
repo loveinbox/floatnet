@@ -1,0 +1,37 @@
+.menu 
+  ul,li
+    display inline-block
+  li
+    margin-right 25px
+    font-size 13px
+    a.active
+        font-weight bold
+        
+  #cross
+    display none
+    
+  .menu-img-wrap
+    display none
+
+.pics
+  td
+    div
+      position relative
+      overflow hidden
+      p
+        position absolute
+        top 0
+        left 0
+        bottom 0
+        display flex
+        justify-content center
+        align-items center
+        width 100%
+        cursor pointer
+        background rgba(22, 22, 22, 0)
+        color transparent
+        &:hover
+          background rgba(22, 22, 22, 0.5)
+          color #fff
+          font-weight bold
+          font-size 14px

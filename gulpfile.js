@@ -12,8 +12,8 @@ const uglify = require('gulp-uglify')
 /*css*/
 const minifyCss = require('gulp-minify-css')
 const autoprefixer = require('gulp-autoprefixer')
-
-/*build*/
+const stylus = require('gulp-stylus')
+  /*build*/
 const runSequence = require('run-sequence')
 const clean = require('gulp-clean')
 const watch = require('gulp-watch')
@@ -34,13 +34,22 @@ gulp.task('js', function() {
 })
 
 gulp.task('css', function() {
-  gulp.src('src/css/base.css')
+  gulp.src('src/css/base.styl')
+    .pipe(stylus({
+      compress: true
+    }))
     .pipe(gulp.dest('public'))
 
-  gulp.src(['src/css/pc.css'])
+  gulp.src(['src/css/pc.styl'])
+    .pipe(stylus({
+      compress: true
+    }))
     .pipe(gulp.dest('public'))
 
-  gulp.src(['src/css/mob.css'])
+  gulp.src(['src/css/mob.styl'])
+    .pipe(stylus({
+      compress: true
+    }))
     .pipe(gulp.dest('public'))
 })
 
@@ -78,7 +87,7 @@ gulp.task('build', function() {
 
 // 开发时，使用watch监测变化并重新build
 gulp.task('watch', function() {
-  gulp.watch(['./src/*.html', './src/**/*.html', './src/css/*.css', './src/js/*.js'], ['build']);
+  gulp.watch(['./src/*.html', './src/**/*.html', './src/css/*.styl', './src/js/*.js'], ['build']);
 })
 
 gulp.task('default', ['build', 'watch'])
