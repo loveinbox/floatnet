@@ -25,6 +25,26 @@ const data = {
     }, {
       src: 'assets/test2.png',
       text: 'image'
+    }],
+    [{
+      src: 'assets/test1.jpg',
+      text: 'image5',
+      rowspan: 2
+    }, {
+      src: 'assets/test2.png',
+      text: 'image6',
+      colspan: 2
+    }, {
+      src: 'assets/test1.jpg',
+      text: 'image7'
+    }],
+    [{
+      src: 'assets/test1.jpg',
+      text: 'image5'
+    }, {
+      src: 'assets/test1.jpg',
+      text: 'image7',
+      colspan: 2
     }]
   ]
 }
@@ -62,6 +82,8 @@ class PageRender {
         let itemImg = document.createElement('img')
         let itemP = document.createElement('p')
 
+        item.colSpan = data.colspan || 1
+        item.rowSpan = data.rowspan || 1
         itemImg.src = data.src
         itemP.innerText = data.text
 
