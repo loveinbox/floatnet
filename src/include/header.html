@@ -3,7 +3,7 @@
   <ul>
     <li id="cross">
       <img class="icon"
-        src="assets/cross.svg">
+        src="assets/cross.png">
     </li>
     <li><a href="work.html">WORK</a></li>
     <li><a href="service.html">SERVICE</a></li>
@@ -13,31 +13,7 @@
   <div class="menu-img-wrap">
     <img id="menu"
       class="icon"
-      src="assets/menu.svg">
+      src="assets/menu.png">
   </div>
 </nav>
-<script>
-/* active */
-const currentHref = window.location.href.split('/').pop()
-let activeTab = document.querySelector(`a[href='${currentHref}']`)
-
-activeTab = activeTab || document.querySelector(`a[href='work.html']`)
-activeTab.className = 'active'
-
-/* show menu */
-const menuButton = document.querySelector('#menu')
-const menuCloseButton = document.querySelector('#cross')
-const menu = document.querySelector('.menu ul')
-
-menuButton.addEventListener('click', event => {
-  menu.className = 'active'
-  menuCloseButton.style.display = 'block'
-  menuButton.style.display = 'none'
-})
-
-menuCloseButton.addEventListener('click', event => {
-  menu.className = ''
-  menuCloseButton.style.display = 'none'
-  menuButton.style.display = 'block'
-})
-</script>
+<script src="header.js"></script>

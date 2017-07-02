@@ -19,8 +19,8 @@ const clean = require('gulp-clean')
 const watch = require('gulp-watch')
 const concat = require('gulp-concat')
 
-gulp.task('html', function() {
-  gulp.src('src/**.html')
+gulp.task('html', ['clean'], function() {
+  return gulp.src('src/**.html')
     .pipe(fileinclude({
       prefix: '@@',
       basepath: '@file'
@@ -28,66 +28,52 @@ gulp.task('html', function() {
     .pipe(gulp.dest('public'))
 })
 
-gulp.task('js', function() {
-  gulp.src('src/js/*.js')
+gulp.task('js', ['clean'], function() {
+  return gulp.src('src/js/*.js')
+    .pipe(babel({
+      presets: ['es2015']
+    }))
     .pipe(gulp.dest('public'))
 })
 
-gulp.task('css', function() {
-  gulp.src('src/css/base.styl')
-    .pipe(stylus({
-      compress: true
-    }))
-    .pipe(gulp.dest('public'))
-
-  gulp.src(['src/css/pc.styl'])
-    .pipe(stylus({
-      compress: true
-    }))
-    .pipe(gulp.dest('public'))
-
-  gulp.src(['src/css/mob.styl'])
+gulp.task('css', ['clean'], function() {
+  return gulp.src(['src/css/base.styl', 'src/css/pc.styl', 'src/css/mob.styl'])
     .pipe(stylus({
       compress: true
     }))
     .pipe(gulp.dest('public'))
 })
 
-gulp.task('img', function() {
-  gulp.src('src/assets/*')
+gulp.task('img', ['clean'], function() {
+  return gulp.src('src/assets/*')
     .pipe(gulp.dest('public/assets'))
 })
 
-gulp.task('inline', function() {
-  gulp.src('public/**.html')
+gulp.task('inline', ['build'], function() {
+  return gulp.src('public/**.html')
     .pipe(inline({
       base: 'public',
       js: [babel({
         presets: ['es2015']
       })],
-      css: [minifyCss, autoprefixer]
+      css: [minifyCss, autoprefixer],
+      ignore: ['header.js', 'base.css']
     }))
     .pipe(gulp.dest('public'))
 })
 
 gulp.task('clean', function() {
-  gulp.src('public/', { read: false })
+  return gulp.src('public/', { read: false })
     .pipe(clean())
 })
 
-gulp.task('build', function() {
-  gulp.start('clean')
-  setTimeout(() => {
-    gulp.start(['css', 'js', 'html', 'img'])
-  }, 100)
-  setTimeout(() => {
-    gulp.start('inline')
-  }, 200)
-})
+gulp.task('build', ['clean', 'css', 'js', 'html', 'img'])
 
 // 开发时，使用watch监测变化并重新build
 gulp.task('watch', function() {
-  gulp.watch(['./src/*.html', './src/**/*.html', './src/css/*.styl', './src/js/*.js'], ['build']);
+  gulp.watch(['./src/*.html', './src/**/*.html', './src/css/*.styl', './src/js/*.js'], ['build', 'inline']);
 })
 
-gulp.task('default', ['build', 'watch'])
+gulp.task('default', ['build', 'inline'], function() {
+  gulp.start('watch')
+})
