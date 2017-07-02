@@ -1,5 +1,6 @@
 /* active */
-const currentHref = window.location.href.split('/').pop()
+const currentHref = window.location.pathname.split('/').pop().slice(0)
+
 let activeTab = document.querySelector(`a[href='${currentHref}']`)
 
 activeTab = activeTab || document.querySelector(`a[href='work.html']`)
