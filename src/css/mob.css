@@ -1,3 +1,11 @@
 .menu li {
   display: block;
 }
+
+.pics ul {
+  font-size: 0;
+}
+
+.pics img {
+  width: 100%;
+}

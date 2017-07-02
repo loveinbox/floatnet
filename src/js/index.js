@@ -40,7 +40,13 @@ class PageRender {
       }
       this.createListItem = data => {
         let item = document.createElement('li')
-        item.innerText = data
+        let itemDiv = document.createElement('div')
+        let itemImg = document.createElement('img')
+
+        itemImg.src = data.src
+        itemDiv.appendChild(itemImg)
+        item.appendChild(itemDiv)
+
         return item
       }
     } else {
